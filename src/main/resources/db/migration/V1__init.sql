@@ -1,0 +1,15 @@
+-- CREATE TABLE rostlina
+-- (
+--     id       INTEGER IDENTITY PRIMARY KEY,
+--     latinsky_nazev    VARCHAR(100) NOT NULL,
+--     cesky_nazev VARCHAR(100) NOT NULL,
+--     popis    VARCHAR(500),
+--     datum_vysadby  DATE      NOT NULL,
+-- );
+-- --
+-- INSERT INTO rostlina (latinsky_nazev, cesky_nazev, popis, datum_vysadby,pece_jaro,pece_podzim)
+-- VALUES ('Božena', 'Němcová', 'Vídeň', '1820-02-04'),
+--        ('Karel', 'Čapek', 'Malé Svatoňovice', '1890-01-09'),
+--        ('Josef', 'Čapek', 'Hronov', '1887-03-23'),
+--        ('Věra', 'Adlová', 'Praha', '1919-07-22')
+-- ;
