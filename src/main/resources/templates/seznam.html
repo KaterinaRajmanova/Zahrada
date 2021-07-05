@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="cs">
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -30,16 +30,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#kadernice">Rostliny</a>
+                    <a class="nav-link" href="/">Rostliny</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#sluzby">Jaro</a>
+                    <a class="nav-link" href="/jaro">Jaro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#reference">Podzim</a>
+                    <a class="nav-link" href="/podzim">Podzim</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#fotogalerie">Tipy a triky</a>
+                    <a class="nav-link" href="/">Tipy a triky</a>
                 </li>
             </ul>
         </div>
@@ -91,51 +91,26 @@
     <div class="container">
         <h2 class="text-center mb-5" id="nadpis">Zasázené rostliny</h2>
         <div class="row">
-            <div class="card m-3 rostlina" style="width: 25rem;">
-                <img src="images/levandule.webp" class="card-img-top img-fluid rounded pt-3" alt="levandule">
-                <div class="card-body">
-                    <h5 class="card-title">Latinský název</h5>
-                    <h6 class="card-text">Český název</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-light">Detail</a>
-                </div>
-            </div>
-            <div class="card m-3 rostlina" style="width: 25rem;">
-                <img src="images/levandule.webp" class="card-img-top img-fluid rounded pt-3" alt="levandule">
-                <div class="card-body">
-                    <h5 class="card-title">Latinský název</h5>
-                    <h6 class="card-text">Český název</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-light">Detail</a>
-                </div>
-            </div>
-            <div class="card m-3 rostlina" style="width: 25rem;">
-                <img src="images/levandule.webp" class="card-img-top img-fluid rounded pt-3" alt="levandule">
-                <div class="card-body">
-                    <h5 class="card-title">Latinský název</h5>
-                    <h6 class="card-text">Český název</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-light">Detail</a>
-                </div>
-            </div>
-            <div class="card m-3 rostlina" style="width: 25rem;">
-                <img src="images/levandule.webp" class="card-img-top img-fluid rounded pt-3" alt="levandule">
-                <div class="card-body">
-                    <h5 class="card-title">Latinský název</h5>
-                    <h6 class="card-text">Český název</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-light">Detail</a>
-                </div>
-            </div>
-            <div class="card m-3 rostlina nova position-relative" style="width: 25rem;">
-                <div class="card-body">
-                    <h1 class="card-text text-center position-absolute top-50 start-50">+</h1>
-                </div>
-            </div>
+
+                    <div class="card m-3 rostlina" style="width: 25rem;" th:each="rostlina : ${seznam}">
+                        <img src="images/levandule.webp" class="card-img-top img-fluid rounded pt-3" alt="levandule">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${rostlina.latinskyNazev}">Latinský název</h5>
+                            <h6 class="card-text" th:text="${rostlina.ceskyNazev}">Český název</h6>
+                            <p class="card-text" th:text="${rostlina.popis}">Some quick example text to build on the card title and make up the bulk
+                                of
+                                the
+                                card's content.</p>
+                            <a th:href="@{/{id}(id=${rostlina.id})}"href="#" class="btn btn-secondary">Detail</a>
+                        </div>
+                    </div>
+
+
+        </div>
+        <div class="d-grid gap-1 col-6 mx-auto mt-5">
+            <a href="/formular">
+            <button class="btn btn-secondary" type="button">Přidat další rostlinu</button>
+            </a>
         </div>
     </div>
 </section>

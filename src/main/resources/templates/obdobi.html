@@ -30,16 +30,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#kadernice">Rostliny</a>
+                    <a class="nav-link" href="/">Rostliny</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#sluzby">Jaro</a>
+                    <a class="nav-link" href="/jaro">Jaro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#reference">Podzim</a>
+                    <a class="nav-link" href="/podzim">Podzim</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#fotogalerie">Tipy a triky</a>
+                    <a class="nav-link" href="/">Tipy a triky</a>
                 </li>
             </ul>
         </div>
@@ -89,22 +89,23 @@
 
 <section class="bg-light py-5">
     <div class="container">
-        <h2 class="text-center mb-5" id="nadpis">Jedna z radostí</h2>
+        <h2 class="text-center mb-5" id="nadpis" th:text="${obdobi}">Zasázené rostliny</h2>
         <div class="row">
-            <div class="card m-3 d-grid gap-1 col-6 mx-auto" style="width: 50rem;">
-                <img src="images/levandule.webp" class="card-img-top img-fluid rounded pt-3" alt="levandule">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${detail.latinskyNazev}">Latinský název</h5>
-                    <h6 class="card-text" th:text="${detail.ceskyNazev}">Český název</h6>
-                    <p class="card-text"  th:text="${detail.popis}">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="/" class="btn btn-secondary">Zpět</a>
-                </div>
-            </div>
+
+                    <div class="card m-3 rostlina" style="width: 25rem;" th:each="rostlina : ${seznam}">
+                        <img src="images/levandule.webp" class="card-img-top img-fluid rounded pt-3" alt="levandule">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${rostlina.latinskyNazev}">Latinský název</h5>
+                            <h6 class="card-text" th:text="${rostlina.ceskyNazev}">Český název</h6>
+                            <p th:if="${obdobi== 'Podzimní péče'}" class="card-text" th:text="${rostlina.pecePodzim}">péče</p>
+                            <p th:if="${obdobi== 'Jarní péče'}"class="card-text" th:text="${rostlina.peceJaro}">péče</p>
+                            <a th:href="@{/{id}(id=${rostlina.id})}"href="#" class="btn btn-secondary">Detail</a>
+                        </div>
+                    </div>
+
+
         </div>
     </div>
-
-
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

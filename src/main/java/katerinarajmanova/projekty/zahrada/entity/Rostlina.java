@@ -28,6 +28,15 @@ public class Rostlina {
         this.datumVysadby = datumVysadby;
     }
 
+    public Rostlina(String latinskyNazev, String ceskyNazev, String popis, String peceJaro, String pecePodzim, LocalDate datumVysadby) {
+        this.latinskyNazev = latinskyNazev;
+        this.ceskyNazev = ceskyNazev;
+        this.popis = popis;
+        this.peceJaro = peceJaro;
+        this.pecePodzim = pecePodzim;
+        this.datumVysadby = datumVysadby;
+    }
+
     public Rostlina() {
     }
 

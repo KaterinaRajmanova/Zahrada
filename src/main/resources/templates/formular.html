@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="cs">
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -30,16 +30,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#kadernice">Rostliny</a>
+                    <a class="nav-link" href="/">Rostliny</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#sluzby">Jaro</a>
+                    <a class="nav-link" href="obdobi">Jaro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#reference">Podzim</a>
+                    <a class="nav-link" href="obdobi">Podzim</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#fotogalerie">Tipy a triky</a>
+                    <a class="nav-link" href="/">Tipy a triky</a>
                 </li>
             </ul>
         </div>
@@ -90,81 +90,91 @@
 <section class="formular bg-light py-5">
     <div class="container">
         <h2 class="text-center mb-5" id="nadpis">Nová radost</h2>
-        <form>
+        <form th:action="@{/formular}" method="post">
             <div class="row mx-5">
                 <div class="col-6 mb-3">
                     <label for="latinskyNazev" class="form-label">Latinský název</label>
-                    <input type="text" class="form-control" id="latinskyNazev">
+                    <input type="text" class="form-control" id="latinskyNazev" th:field="${form.latinskyNazev}">
+                    <div class="error" th:if="${#fields.hasErrors('form.latinskyNazev')}" th:errors="${form.latinskyNazev}"></div>
                 </div>
                 <div class="col-6 mb-3">
                     <label for="ceskyNazev" class="form-label">Český název</label>
-                    <input type="text" class="form-control" id="ceskyNazev">
+                    <input type="text" class="form-control" id="ceskyNazev" th:field="${form.ceskyNazev}">
+                    <div class="error" th:if="${#fields.hasErrors('form.ceskyNazev')}" th:errors="${form.ceskyNazev}"></div>
                 </div>
             </div>
 
             <div class="row mx-5">
                 <div class="mb-5">
                     <label for="popis" class="form-label">Popis</label>
-                    <textarea class="form-control" id="popis" rows="3"></textarea>
+                    <textarea class="form-control" id="popis" rows="3" th:field="${form.popis}"></textarea>
+                    <div class="error" th:if="${#fields.hasErrors('form.popis')}" th:errors="${form.popis}"></div>
                 </div>
             </div>
 
-            <div class="col-6 row mx-5">
-                <select class="form-select form-select-sm mb-5" aria-label=".form-select-sm example">
-                    <option selected>Vyber druh</option>
-                    <option value="1">Letnička</option>
-                    <option value="2">Trvalka</option>
-                    <option value="3">Keř</option>
-                    <option value="4">Strom</option>
-                </select>
-            </div>
+<!--&lt;!&ndash;            <div class="col-6 row mx-5">&ndash;&gt;-->
+<!--&lt;!&ndash;                <select class="form-select form-select-sm mb-5" aria-label=".form-select-sm example">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option selected>Vyber druh</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option value="1">Letnička</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option value="2">Trvalka</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option value="3">Keř</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option value="4">Strom</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                </select>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
 
             <div class="row mx-5">
                 <div class="col-6 mb-5">
-                    <label for="rok-vysadby" class="form-label">Doba výsadby</label>
-                    <input type="date" class="form-control" id="rok-vysadby">
+                    <label for="datum-vysadby" class="form-label" th:field="${form.datumVysadby}">Doba výsadby</label>
+                    <input type="date" class="form-control" id="datum-vysadby">
+                    <div class="error" th:if="${#fields.hasErrors('form.datumVysadby')}" th:errors="${form.datumVysadby}"></div>
                 </div>
             </div>
+
             <div class="row mx-5">
                 <h6>Práce jaro</h6>
                 <div class="col-3 mb-5">
-                    <input id="ostrihat" type="checkbox"/>
-                    <label for="ostrihat">Ostříhat</label>
+                    <input  type="checkbox" th:field="${form.zvolenePraceJaro}" value="OSTŘÍHAT"/>
+                    <label th:for="${#ids.prev('zvolenePraceJaro')}">Ostříhat</label>
                 </div>
                 <div class="col-3 mb-3">
-                    <input id="pohnojit" type="checkbox"/>
-                    <label for="pohnojit">Pohnojit</label>
+                    <input type="checkbox" th:field="${form.zvolenePraceJaro}" value="POHNOJIT"/>
+                    <label th:for="${#ids.prev('zvolenePraceJaro')}">Pohnojit</label>
                 </div>
                 <div class="col-3 mb-3">
-                    <input id="odplevelit" type="checkbox"/>
-                    <label for="odplevelit">Odplevelit</label>
+                    <input  type="checkbox" th:field="${form.zvolenePraceJaro}" value="ODPLEVELIT"/>
+                    <label th:for="${#ids.prev('zvolenePraceJaro')}">Odplevelit</label>
                 </div>
                 <div class="col-3 mb-3">
-                    <input id="rozsadit" type="checkbox"/>
-                    <label for="rozsadit">Rozsadit</label>
+                    <input  type="checkbox" th:field="${form.zvolenePraceJaro}" value="ROZSADIT"/>
+                    <label th:for="${#ids.prev('zvolenePraceJaro')}">Rozsadit</label>
+                </div>
+                <div class="error" th:if="${#fields.hasErrors('form.zvolenePraceJaro')}"
+                     th:errors="${form.zvolenePraceJaro}">
                 </div>
             </div>
-            <div class="row mx-5">
-                <h6>Práce podzim</h6>
-                <div class="col-3 mb-3">
-                    <input id="ostrihat-podzim" type="checkbox"/>
-                    <label for="ostrihat-podzim">Ostříhat</label>
-                </div>
-                <div class="col-3 mb-3">
-                    <input id="pohnojit-podzim" type="checkbox"/>
-                    <label for="pohnojit-podzim">Pohnojit</label>
-                </div>
-                <div class="col-3 mb-3">
-                    <input id="odplevelit-podzim" type="checkbox"/>
-                    <label for="odplevelit-podzim">Odplevelit</label>
-                </div>
-                <div class="col-3 mb-3">
-                    <input id="rozsadit-podzim" type="checkbox"/>
-                    <label for="rozsadit-podzim">Rozsadit</label>
-                </div>
+            <h6>Práce podzim</h6>
+            <div class="col-3 mb-5">
+                <input type="checkbox" th:field="${form.zvolenePracePodzim}" value="OSTŘÍHAT"/>
+                <label th:for="${#ids.prev('zvolenePracePodzim')}">Ostříhat</label>
             </div>
+            <div class="col-3 mb-3">
+                <input  type="checkbox" th:field="${form.zvolenePracePodzim}" value="POHNOJIT"/>
+                <label th:for="${#ids.prev('zvolenePracePodzim')}">Pohnojit</label>
+            </div>
+            <div class="col-3 mb-3">
+                <input  type="checkbox" th:field="${form.zvolenePracePodzim}" value="ODPLEVELIT"/>
+                <label th:for="${#ids.prev('zvolenePracePodzim')}">Odplevelit</label>
+            </div>
+            <div class="col-3 mb-3">
+                <input type="checkbox" th:field="${form.zvolenePracePodzim}" value="ROZSADIT"/>
+                <label th:for="${#ids.prev('zvolenePracePodzim')}">Rozsadit</label>
+            </div>
+            <div class="error" th:if="${#fields.hasErrors('form.zvolenePracePodzim')}"
+                 th:errors="${form.zvolenePracePodzim}">
+            </div>
+
             <div class="d-grid gap-1 col-6 mx-auto mt-5">
-                <button class="btn btn-secondary" type="button">Uložit</button>
+                <button type="submit" class="btn btn-secondary" >Uložit</button>
             </div>
         </form>
     </div>
