@@ -40,4 +40,8 @@ public class TridaService {
     public void novaRostlina(Rostlina rostlina){
         rostlinaRepository.save(rostlina);
     }
+
+    public void smazat(Integer id) {
+        rostlinaRepository.deleteById(id);
+    }
 }

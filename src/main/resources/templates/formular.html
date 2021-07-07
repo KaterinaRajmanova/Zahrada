@@ -33,10 +33,10 @@
                     <a class="nav-link" href="/">Rostliny</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="obdobi">Jaro</a>
+                    <a class="nav-link" href="/jaro">Jaro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="obdobi">Podzim</a>
+                    <a class="nav-link" href="/podzim">Podzim</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/">Tipy a triky</a>
@@ -95,12 +95,14 @@
                 <div class="col-6 mb-3">
                     <label for="latinskyNazev" class="form-label">Latinský název</label>
                     <input type="text" class="form-control" id="latinskyNazev" th:field="${form.latinskyNazev}">
-                    <div class="error" th:if="${#fields.hasErrors('form.latinskyNazev')}" th:errors="${form.latinskyNazev}"></div>
+                    <div class="error" th:if="${#fields.hasErrors('form.latinskyNazev')}"
+                         th:errors="${form.latinskyNazev}"></div>
                 </div>
                 <div class="col-6 mb-3">
                     <label for="ceskyNazev" class="form-label">Český název</label>
                     <input type="text" class="form-control" id="ceskyNazev" th:field="${form.ceskyNazev}">
-                    <div class="error" th:if="${#fields.hasErrors('form.ceskyNazev')}" th:errors="${form.ceskyNazev}"></div>
+                    <div class="error" th:if="${#fields.hasErrors('form.ceskyNazev')}"
+                         th:errors="${form.ceskyNazev}"></div>
                 </div>
             </div>
 
@@ -112,28 +114,19 @@
                 </div>
             </div>
 
-<!--&lt;!&ndash;            <div class="col-6 row mx-5">&ndash;&gt;-->
-<!--&lt;!&ndash;                <select class="form-select form-select-sm mb-5" aria-label=".form-select-sm example">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <option selected>Vyber druh</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <option value="1">Letnička</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <option value="2">Trvalka</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <option value="3">Keř</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <option value="4">Strom</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                </select>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-
             <div class="row mx-5">
                 <div class="col-6 mb-5">
-                    <label for="datum-vysadby" class="form-label" th:field="${form.datumVysadby}">Doba výsadby</label>
-                    <input type="date" class="form-control" id="datum-vysadby">
-                    <div class="error" th:if="${#fields.hasErrors('form.datumVysadby')}" th:errors="${form.datumVysadby}"></div>
+                    <label for="datumVysadby" class="form-label">Moje datum</label>
+                    <input type="date" class="form-control" id="datumVysadby" th:field="${form.datumVysadby}">
+                    <div class="error" th:if="${#fields.hasErrors('form.datumVysadby')}"
+                         th:errors="${form.datumVysadby}"></div>
                 </div>
             </div>
 
             <div class="row mx-5">
                 <h6>Práce jaro</h6>
                 <div class="col-3 mb-5">
-                    <input  type="checkbox" th:field="${form.zvolenePraceJaro}" value="OSTŘÍHAT"/>
+                    <input type="checkbox" th:field="${form.zvolenePraceJaro}" value="OSTŘÍHAT"/>
                     <label th:for="${#ids.prev('zvolenePraceJaro')}">Ostříhat</label>
                 </div>
                 <div class="col-3 mb-3">
@@ -141,40 +134,42 @@
                     <label th:for="${#ids.prev('zvolenePraceJaro')}">Pohnojit</label>
                 </div>
                 <div class="col-3 mb-3">
-                    <input  type="checkbox" th:field="${form.zvolenePraceJaro}" value="ODPLEVELIT"/>
+                    <input type="checkbox" th:field="${form.zvolenePraceJaro}" value="ODPLEVELIT"/>
                     <label th:for="${#ids.prev('zvolenePraceJaro')}">Odplevelit</label>
                 </div>
                 <div class="col-3 mb-3">
-                    <input  type="checkbox" th:field="${form.zvolenePraceJaro}" value="ROZSADIT"/>
+                    <input type="checkbox" th:field="${form.zvolenePraceJaro}" value="ROZSADIT"/>
                     <label th:for="${#ids.prev('zvolenePraceJaro')}">Rozsadit</label>
                 </div>
                 <div class="error" th:if="${#fields.hasErrors('form.zvolenePraceJaro')}"
                      th:errors="${form.zvolenePraceJaro}">
                 </div>
             </div>
-            <h6>Práce podzim</h6>
-            <div class="col-3 mb-5">
-                <input type="checkbox" th:field="${form.zvolenePracePodzim}" value="OSTŘÍHAT"/>
-                <label th:for="${#ids.prev('zvolenePracePodzim')}">Ostříhat</label>
-            </div>
-            <div class="col-3 mb-3">
-                <input  type="checkbox" th:field="${form.zvolenePracePodzim}" value="POHNOJIT"/>
-                <label th:for="${#ids.prev('zvolenePracePodzim')}">Pohnojit</label>
-            </div>
-            <div class="col-3 mb-3">
-                <input  type="checkbox" th:field="${form.zvolenePracePodzim}" value="ODPLEVELIT"/>
-                <label th:for="${#ids.prev('zvolenePracePodzim')}">Odplevelit</label>
-            </div>
-            <div class="col-3 mb-3">
-                <input type="checkbox" th:field="${form.zvolenePracePodzim}" value="ROZSADIT"/>
-                <label th:for="${#ids.prev('zvolenePracePodzim')}">Rozsadit</label>
-            </div>
-            <div class="error" th:if="${#fields.hasErrors('form.zvolenePracePodzim')}"
-                 th:errors="${form.zvolenePracePodzim}">
+            <div class="row mx-5">
+                <h6>Práce podzim</h6>
+                <div class="col-3 mb-3">
+                    <input type="checkbox" th:field="${form.zvolenePracePodzim}" value="OSTŘÍHAT"/>
+                    <label th:for="${#ids.prev('zvolenePracePodzim')}">Ostříhat</label>
+                </div>
+                <div class="col-3 mb-3">
+                    <input type="checkbox" th:field="${form.zvolenePracePodzim}" value="POHNOJIT"/>
+                    <label th:for="${#ids.prev('zvolenePracePodzim')}">Pohnojit</label>
+                </div>
+                <div class="col-3 mb-3">
+                    <input type="checkbox" th:field="${form.zvolenePracePodzim}" value="ODPLEVELIT"/>
+                    <label th:for="${#ids.prev('zvolenePracePodzim')}">Odplevelit</label>
+                </div>
+                <div class="col-3 mb-3">
+                    <input type="checkbox" th:field="${form.zvolenePracePodzim}" value="ROZSADIT"/>
+                    <label th:for="${#ids.prev('zvolenePracePodzim')}">Rozsadit</label>
+                </div>
+                <div class="error" th:if="${#fields.hasErrors('form.zvolenePracePodzim')}"
+                     th:errors="${form.zvolenePracePodzim}">
+                </div>
             </div>
 
             <div class="d-grid gap-1 col-6 mx-auto mt-5">
-                <button type="submit" class="btn btn-secondary" >Uložit</button>
+                <button type="submit" class="btn btn-secondary">Uložit</button>
             </div>
         </form>
     </div>

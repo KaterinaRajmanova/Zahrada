@@ -30,16 +30,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#kadernice">Rostliny</a>
+                    <a class="nav-link" href="/">Rostliny</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#sluzby">Jaro</a>
+                    <a class="nav-link" href="/jaro">Jaro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#reference">Podzim</a>
+                    <a class="nav-link" href="/podzim">Podzim</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#fotogalerie">Tipy a triky</a>
+                    <a class="nav-link" href="/">Tipy a triky</a>
                 </li>
             </ul>
         </div>
@@ -96,9 +96,16 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${detail.latinskyNazev}">Latinský název</h5>
                     <h6 class="card-text" th:text="${detail.ceskyNazev}">Český název</h6>
-                    <p class="card-text"  th:text="${detail.popis}">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="/" class="btn btn-secondary">Zpět</a>
+                    <p class="card-text" th:text="${detail.popis}">Some quick example text to build on the card title
+                        and make up the bulk of the card's content.</p>
+                    <div class="row">
+                        <a href="/" class="btn btn-secondary d-grid gap-1 col-6 mx-auto mt-5">Zpět</a>
+                        <form th:href="@{/{id}(id=${detail.id})}" href="#" method="post">
+                            <div class="d-grid gap-1 col-6 mx-auto mt-2">
+                                <button type="submit" class="btn btn-secondary">Smazat</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

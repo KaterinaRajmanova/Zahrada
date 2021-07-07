@@ -7,6 +7,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.EnumSet;
 
 public class RostlinaForm {
@@ -18,13 +20,8 @@ public class RostlinaForm {
     @NotBlank
     private String popis;
 
-//    private String peceJaro;
-//    private String pecePodzim;
-
-    @NotNull
-    @DateTimeFormat
     private LocalDate datumVysadby;
-    @NotNull
+
     private EnumSet<Prace> zvolenePraceJaro = EnumSet.noneOf(Prace.class);
     private EnumSet<Prace> zvolenePracePodzim = EnumSet.noneOf(Prace.class);
 
@@ -52,13 +49,7 @@ public class RostlinaForm {
         this.popis = popis;
     }
 
-    public LocalDate getDatumVysadby() {
-        return datumVysadby;
-    }
 
-    public void setDatumVysadby(LocalDate datumVysadby) {
-        this.datumVysadby = datumVysadby;
-    }
 
     public EnumSet<Prace> getZvolenePraceJaro() {
         return zvolenePraceJaro;
@@ -74,5 +65,14 @@ public class RostlinaForm {
 
     public void setZvolenePracePodzim(EnumSet<Prace> zvolenePracePodzim) {
         this.zvolenePracePodzim = zvolenePracePodzim;
+    }
+
+    public LocalDate getDatumVysadby() {
+        return datumVysadby;
+    }
+
+    public void setDatumVysadby(String datumVysadby) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.datumVysadby = LocalDate.parse(datumVysadby, formatter);
     }
 }

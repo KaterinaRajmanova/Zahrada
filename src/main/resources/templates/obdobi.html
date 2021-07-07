@@ -91,19 +91,16 @@
     <div class="container">
         <h2 class="text-center mb-5" id="nadpis" th:text="${obdobi}">Zasázené rostliny</h2>
         <div class="row">
-
-                    <div class="card m-3 rostlina" style="width: 25rem;" th:each="rostlina : ${seznam}">
-                        <img src="images/levandule.webp" class="card-img-top img-fluid rounded pt-3" alt="levandule">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${rostlina.latinskyNazev}">Latinský název</h5>
-                            <h6 class="card-text" th:text="${rostlina.ceskyNazev}">Český název</h6>
-                            <p th:if="${obdobi== 'Podzimní péče'}" class="card-text" th:text="${rostlina.pecePodzim}">péče</p>
-                            <p th:if="${obdobi== 'Jarní péče'}"class="card-text" th:text="${rostlina.peceJaro}">péče</p>
-                            <a th:href="@{/{id}(id=${rostlina.id})}"href="#" class="btn btn-secondary">Detail</a>
-                        </div>
-                    </div>
-
-
+            <div class="card m-3 rostlina" style="width: 25rem;" th:each="rostlina : ${seznam}">
+                <img src="images/levandule.webp" class="card-img-top img-fluid rounded pt-3" alt="levandule">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${rostlina.latinskyNazev}">Latinský název</h5>
+                    <h6 class="card-text" th:text="${rostlina.ceskyNazev}">Český název</h6>
+                    <p th:if="${obdobi== 'Podzimní péče'}" class="card-text" th:text="${rostlina.pecePodzim}">péče</p>
+                    <p th:if="${obdobi== 'Jarní péče'}" class="card-text" th:text="${rostlina.peceJaro}">péče</p>
+                    <a th:href="@{/{id}(id=${rostlina.id})}" href="#" class="btn btn-secondary">Detail</a>
+                </div>
+            </div>
         </div>
     </div>
 </section>

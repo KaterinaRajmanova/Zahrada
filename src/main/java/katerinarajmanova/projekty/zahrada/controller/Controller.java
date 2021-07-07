@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @org.springframework.stereotype.Controller
 public class Controller {
 
     private final TridaService service;
-
 
     public Controller(TridaService service) {
         this.service = service;
@@ -71,36 +71,22 @@ public class Controller {
     }
 
     @PostMapping("/formular")
-    public Object form(@ModelAttribute("form") @Valid RostlinaForm form, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            return "/formular";
-//        }
+    public String pridej(@ModelAttribute("form") @Valid RostlinaForm form, BindingResult bindingResult) {
 
-//        String prace = "";
-//        switch (form.getZvolenePrace().toString()) {
-//            case Prace.OSTŘÍHAT:
-//                prace = "ostrihat";
-//                break;
-//            case Prace.POHNOJIT:
-//                prace = "pohnojit";
-//                break;
-//            case Prace.ODPLEVELIT:
-//                prace = "odplevelit";
-//                break;
-//            case Prace.ROZSADIT:
-//                prace = "rozsadit";
-//                break;
-//            default:
-//                prace = "chyba";
-//        }
-
-        String praceJaro = "";
-        for (Prace prace: form.getZvolenePraceJaro()) {
-            praceJaro = praceJaro + prace.toString() + " ";
+        String praceJaro = null;
+        if(form.getZvolenePraceJaro()!=null){
+            praceJaro = "";
+            for (Prace prace: form.getZvolenePraceJaro()) {
+                praceJaro = praceJaro + prace.toString() + " ";
+            }
         }
-        String pracePodzim = "";
-        for (Prace prace: form.getZvolenePracePodzim()) {
-            pracePodzim = pracePodzim + prace.toString() + " ";
+
+        String pracePodzim = null;
+        if(form.getZvolenePracePodzim()!=null) {
+            pracePodzim = "";
+            for (Prace prace : form.getZvolenePracePodzim()) {
+                pracePodzim = pracePodzim + prace.toString() + " ";
+            }
         }
 
         Rostlina novaRostlina = new Rostlina(
@@ -111,11 +97,13 @@ public class Controller {
                 pracePodzim,
                 form.getDatumVysadby()
         );
-
         service.novaRostlina(novaRostlina);
+        return "redirect:/";
+    }
 
-
-        return new ModelAndView("/formular");
-
+    @PostMapping("/{id:[0-9]+}")
+    public String smaz(@PathVariable Integer id, Pageable pageable) {
+        service.smazat(id);
+        return "redirect:/";
     }
 }
