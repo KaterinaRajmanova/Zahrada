@@ -1,5 +1,7 @@
 package katerinarajmanova.projekty.zahrada.service;
 
+import katerinarajmanova.projekty.zahrada.controller.RostlinaForm;
+import katerinarajmanova.projekty.zahrada.entity.Prace;
 import katerinarajmanova.projekty.zahrada.entity.Rostlina;
 import katerinarajmanova.projekty.zahrada.repository.RostlinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,36 @@ public class TridaService {
         return rostlina.get();
     }
 
-    public void novaRostlina(Rostlina rostlina){
+    public Rostlina pridat(RostlinaForm form){
+
+        String praceJaro = null;
+        if(form.getZvolenePraceJaro()!=null){
+            praceJaro = "";
+            for (Prace prace: form.getZvolenePraceJaro()) {
+                praceJaro = praceJaro + prace.toString() + " ";
+            }
+        }
+
+        String pracePodzim = null;
+        if(form.getZvolenePracePodzim()!=null) {
+            pracePodzim = "";
+            for (Prace prace : form.getZvolenePracePodzim()) {
+                pracePodzim = pracePodzim + prace.toString() + " ";
+            }
+        }
+
+        Rostlina novaRostlina = new Rostlina(
+                form.getLatinskyNazev(),
+                form.getCeskyNazev(),
+                form.getPopis(),
+                praceJaro,
+                pracePodzim,
+                form.getDatumVysadby()
+        );
+        return novaRostlina;
+    }
+
+    public void ulozit(Rostlina rostlina){
         rostlinaRepository.save(rostlina);
     }
 

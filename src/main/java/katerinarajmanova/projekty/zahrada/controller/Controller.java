@@ -72,32 +72,8 @@ public class Controller {
 
     @PostMapping("/formular")
     public String pridej(@ModelAttribute("form") @Valid RostlinaForm form, BindingResult bindingResult) {
-
-        String praceJaro = null;
-        if(form.getZvolenePraceJaro()!=null){
-            praceJaro = "";
-            for (Prace prace: form.getZvolenePraceJaro()) {
-                praceJaro = praceJaro + prace.toString() + " ";
-            }
-        }
-
-        String pracePodzim = null;
-        if(form.getZvolenePracePodzim()!=null) {
-            pracePodzim = "";
-            for (Prace prace : form.getZvolenePracePodzim()) {
-                pracePodzim = pracePodzim + prace.toString() + " ";
-            }
-        }
-
-        Rostlina novaRostlina = new Rostlina(
-                form.getLatinskyNazev(),
-                form.getCeskyNazev(),
-                form.getPopis(),
-                praceJaro,
-                pracePodzim,
-                form.getDatumVysadby()
-        );
-        service.novaRostlina(novaRostlina);
+        Rostlina novaRostlina = service.pridat(form);
+        service.ulozit(novaRostlina);
         return "redirect:/";
     }
 
